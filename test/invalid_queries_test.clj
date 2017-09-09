@@ -3,7 +3,7 @@
             [validator :refer :all]))
 
 
-(deftest invalid-queries-test
+(deftest facts-syntax-test
     (testing "varon(juan) should be true"
         (is (= (is-valid-fact? "varon(juan)")
             true)
@@ -41,7 +41,7 @@
     )
 )
 
-(deftest invalid-rule-test
+(deftest rules-syntax-test
     (testing "varon(juan) should be false"
         (is (= (is-valid-rule? "varon(juan)")
             false)
@@ -71,5 +71,4 @@
             true)
         )
     )
-    
 )
