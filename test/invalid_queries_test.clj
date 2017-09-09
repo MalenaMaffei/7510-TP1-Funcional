@@ -3,25 +3,35 @@
             [validator :refer :all]))
 
 
-(deftest invalid-fact-test
+(deftest invalid-queries-test
     (testing "varon(juan) should be true"
         (is (= (is-valid-fact? "varon(juan)")
-            true))
+            true)
+        )
     )
 
     (testing "varon(juan) should be false"
         (is (= (is-valid-fact? "varon(juan )")
-            false))
+            false)
+        )
     )
     
     (testing "varon(juan, ) should be false"
         (is (= (is-valid-fact? "varon(juan, )")
-            false))
+            false)
+        )
     )
 
     (testing "amigos(juan, pepe, adrian, elias) should be true"
         (is (= (is-valid-fact? "amigos(juan, pepe, adrian, elias)")
-            true))
+            true)
+        )
+    )
+
+    (testing "varon(juan,pepe) should be false"
+        (is (= (is-valid-fact? "varon(juan,pepe)")
+            false)
+        )
     )
 )
 
