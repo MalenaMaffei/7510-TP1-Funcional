@@ -39,5 +39,9 @@
 (defn valid-database?
     "checks if input has valid fact format"
     [database]
-    (map valid-line? ((filter (fn [x] (not (blank? x))) (split-lines database))))
+    (every? valid-line?
+        (doall (map trim
+            (doall (filter (fn [x] (not (blank? x))) (split database #"\.")))
+        ))
+    )
 )

@@ -3,7 +3,7 @@
             [validator :refer :all]))
 
 
-(def invalid-database "
+(def complete-invalid-database "
 	varon(juan).
     varon.
     padre(juan,pepe).
@@ -13,8 +13,17 @@
 
 (def incomplete-database "
 	varon(juan).
-    varon(pepe)
+    varon.
 ")
+
+(def complete-valid-database "
+	varon(juan).
+    varon(pepe).
+    padre(juan, pepe).
+    hola(que, tal).
+    saludar(juan, pepe) :- hola(juan), hola(pepe).
+")
+
 
 
 (deftest facts-syntax-test
@@ -85,4 +94,25 @@
             true)
         )
     )
+)
+
+(deftest database-test
+    (testing "complete db with invalid facts and rules should be false"
+      (is (= (valid-database? complete-invalid-database)
+          false)
+      )
+    )
+
+    (testing "complete db with valid facts and rules should be true"
+      (is (= (valid-database? complete-valid-database)
+          true)
+      )
+    )
+
+    (testing "incomplete db should be false"
+      (is (= (valid-database? incomplete-database)
+          false)
+      )
+    )
+
 )
