@@ -40,8 +40,8 @@
     "checks if input has valid fact format"
     [database]
     (every? valid-line?
-        (doall (map trim
+        (map trim
             (doall (filter (fn [x] (not (blank? x))) (split database #"\.")))
-        ))
+        )
     )
 )
