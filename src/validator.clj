@@ -1,5 +1,5 @@
 (ns validator
-    (:require [clojure.string :refer :all])    
+    (:require [clojure.string :refer :all])
 )
 
 (def fact-syntax "[a-z\\-]+\\([a-z\\-]+(, [a-z\\-]+){0,}\\)")
@@ -9,7 +9,7 @@
 (defn delimit-pattern
     "delimits a regex pattern"
     [pattern]
-    (str "^" pattern "$")    
+    (str "^" pattern "$")
 )
 
 (defn valid-fact?
@@ -39,6 +39,5 @@
 (defn valid-database?
     "checks if input has valid fact format"
     [database]
-    (map valid-line? (split-lines database))
+    (map valid-line? ((filter (fn [x] (not (blank? x))) (split-lines database))))
 )
-

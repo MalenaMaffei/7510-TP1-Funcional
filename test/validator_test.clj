@@ -1,16 +1,21 @@
-(ns invalid-queries-test
+(ns validator-test
   (:require [clojure.test :refer :all]
             [validator :refer :all]))
 
 
-(def incomplete-database "
+(def invalid-database "
 	varon(juan).
     varon.
     padre(juan,pepe).
     hola(que, tal).
     saludar :- hola(juan), hola(pepe).
 ")
-           
+
+(def incomplete-database "
+	varon(juan).
+    varon(pepe)
+")
+
 
 (deftest facts-syntax-test
     (testing "varon(juan) should be true"
@@ -24,7 +29,7 @@
             false)
         )
     )
-    
+
     (testing "varon(juan, ) should be false"
         (is (= (valid-fact? "varon(juan, )")
             false)
