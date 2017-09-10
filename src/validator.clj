@@ -4,14 +4,14 @@
 
 (def fact-syntax "[a-z\\-]+\\([a-z\\-]+(, [a-z\\-]+){0,}\\)")
 
-(def rule-syntax (str fact-syntax " :\\- " fact-syntax "(, " fact-syntax "){0,}"))
+(def rule-syntax (str "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" " :\\- " "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" "(, " "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" "){0,}"))
 
 (defn delimit-pattern
     "delimits a regex pattern"
     [pattern]
     (str "^" pattern "$")
 )
-
+"TODO: LAS RULES TIENEN COMO ARGUMENTOS VARIABLES EN MAYUS SOLAMENTE..."
 (defn valid-fact?
     "checks if input has valid fact format"
     [fact]

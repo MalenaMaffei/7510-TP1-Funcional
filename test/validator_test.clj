@@ -8,7 +8,7 @@
     varon.
     padre(juan,pepe).
     hola(que, tal).
-    saludar :- hola(juan), hola(pepe).
+    saludar :- hola(X), hola(Y).
 ")
 
 (def incomplete-database "
@@ -21,7 +21,7 @@
     varon(pepe).
     padre(juan, pepe).
     hola(que, tal).
-    saludar(juan, pepe) :- hola(juan), hola(pepe).
+    saludar(X, Y) :- hola(X), hola(Y).
 ")
 
 
@@ -65,32 +65,44 @@
 )
 
 (deftest rules-syntax-test
-    (testing "varon(juan) should be false"
-        (is (= (valid-rule? "varon(juan)")
+    (testing "varon(X) should be false"
+        (is (= (valid-rule? "varon(X)")
             false)
         )
     )
 
-    (testing "varon(juan) :-  should be false"
-        (is (= (valid-rule? "varon(juan) :- ")
+    (testing "varon(X) :-  should be false"
+        (is (= (valid-rule? "varon(X) :- ")
             false)
         )
     )
 
-    (testing "varon(juan) :- hola(juan) should be true"
-        (is (= (valid-rule? "varon(juan) :- hola(juan)")
-            true)
-        )
-    )
-
-    (testing "varon(juan):-hola(juan) should be false"
-        (is (= (valid-rule? "varon(juan):-hola(juan)")
+    (testing "varon(x) :- hola(y) should be false"
+        (is (= (valid-rule? "varon(x) :- hola(y)")
             false)
         )
     )
 
-    (testing "saludar(pepe, carlos) :- hola(pepe), hola(carlos) should be true"
-        (is (= (valid-rule? "saludar(pepe, carlos) :- hola(pepe), hola(carlos)")
+    (testing "varon(X):-hola(Y) should be false"
+        (is (= (valid-rule? "varon(X):-hola(Y)")
+            false)
+        )
+    )
+
+    (testing "varon :- hola(Y) should be false"
+        (is (= (valid-rule? "varon :- hola(Y)")
+            false)
+        )
+    )
+
+    (testing "varon(XY):-hola(Y) should be false"
+        (is (= (valid-rule? "varon(XY):-hola(Y)")
+            false)
+        )
+    )
+
+    (testing "hijo(X, Y) :- varon(X), padre(Y, X). should be true"
+        (is (= (valid-rule? "hijo(X, Y) :- varon(X), padre(Y, X)")
             true)
         )
     )
