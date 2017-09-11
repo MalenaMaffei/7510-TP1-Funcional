@@ -8,7 +8,6 @@
 (def fact-syntax #"^[a-z\-]+\([a-z\-]+(, [a-z\-]+){0,}\)$")
 (def rule-syntax #"^[a-z\-]+\([A-Z](, [A-Z]+){0,}\) :\- [a-z\-]+\([A-Z](, [A-Z]+){0,}\)(, [a-z\-]+\([A-Z](, [A-Z]+){0,}\)){0,}$")
 
-;"TODO: rules tienen que ser validadas un poco mas, que las variables coincidan por lo menos
 
 (defn valid-fact?
     "checks if input has valid fact format"
