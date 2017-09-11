@@ -1,28 +1,28 @@
 (ns parser (:require [clojure.string :refer :all])
 (:require [syntax-validator :refer :all]))
 
+
 (defn get-database
   "parses db string and outputs it in list form"
   [text-database]
   (map trim
-          (doall (filter (fn [x] (not (blank? x))) (split text-database #"\.")))
+          (doall (filter (fn [x] (not (blank? x))) (split text-database db-delimiter)))
   )
 )
 
 (defn fact-exists?
   [database fact]
-  ; TODO usar forma clujure, esto es java
   (.contains database fact)
 )
 
 (defn get-params
   "gets parameters from fact or rule"
   [query]
-  (split (second (re-matches #"^[a-z]+\(([^\)]+)\).*$" query)) #", ")
+  (split (second (re-matches #"^[a-z]+\(([^\)]+)\).*$" query)) param-delimiter)
 )
 
 (defn fill-rule
-  "replaces all variables from rule with the corresponding parametrs from the query"
+  "replaces all variables from rule-definition with the corresponding parametrs from the query"
   [rule-definition rule-params query-params]
   (def to-replace (join "|" rule-params))
   (def replacement-map (doall (zipmap rule-params query-params)))
@@ -33,7 +33,7 @@
   "gets list of facts that compose given rule"
   [rule-definition rule-params query-params]
   (def filled-rule (fill-rule rule-definition rule-params query-params))
-  (split (clojure.string/replace (second (re-matches #"^.+ :- ([a-z]+\(.+\))$" filled-rule)) #"(\)), " "$1.") #"\.")
+  (split (clojure.string/replace (second (re-matches #"^.+ :- ([a-z]+\(.+\))$" filled-rule)) #"(\)), " "$1.") db-delimiter)
 )
 
 (defn get-rules

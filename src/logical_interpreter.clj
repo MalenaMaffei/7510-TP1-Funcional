@@ -1,18 +1,24 @@
 (ns logical-interpreter
   (:require [parser :refer :all])
-  (:require [clojure.string :refer :all])
 )
 
 (defn solve-query
   [database query]
+  ; gets the name of the rule
   (def query-rule (second (re-matches #"([a-z]+)\(.+" query)))
+
+  ; gets the params inside the query rule
   (def query-params (get-params query))
+
+  ; pulls the rule's definition from the databse
   (def rule-definition (get-rule-def database query-rule))
 
   (if (empty? rule-definition)
+  ; if empty, the rule did not exist, so query is false
     false
     (if (not= (count (get-params rule-definition)) (count query-params))
-      false
+    ; if definition and query parameters don't match, result is nil
+      nil
       (every? (fn [x] (fact-exists? database x))
         (get-rule-facts rule-definition (get-params rule-definition) query-params)
       )
