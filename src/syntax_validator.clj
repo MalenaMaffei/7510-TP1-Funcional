@@ -1,4 +1,4 @@
-(ns validator
+(ns syntax-validator
     (:require [clojure.string :refer :all])
 )
 
@@ -42,9 +42,5 @@
 (defn valid-database?
     "checks if input has valid fact format"
     [database]
-    (every? valid-line? database
-        ;;(map trim
-        ;;    (doall (filter (fn [x] (not (blank? x))) (split database #"\.")))
-        ;;)
-    )
+    (every? valid-line? database)
 )

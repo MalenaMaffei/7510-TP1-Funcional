@@ -1,6 +1,6 @@
-(ns validator-test
+(ns syntax-validator-test
   (:require [clojure.test :refer :all]
-            [validator :refer :all]))
+            [syntax-validator :refer :all]))
 
 
 (def complete-invalid-database (list "varon(juan)" "padre(juan,pepe)" "hola(que, tal)" "saludar :- hola(X), hola(Y)"))
