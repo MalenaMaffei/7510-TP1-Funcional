@@ -18,6 +18,16 @@ Las reglas deben tener variables compuestas de un solo caracter en mayúsculas y
 
 * si la regla se cumple o los hechos sean verdaderos, se devolvera **true**
 
+## Módulos
+
+#### syntax-validator
+Se encarga de verificar que el formato de las queries y de las entries de la database sean de la forma correcta.
+
+### parser
+Se encarga de extraer de la database y las queries y formatearlas para poder resolver la consulta
+
+### logical-interpreter
+Contiene la lógica para resolver las consultas.
 
 ## Correr Tests
 lein test
