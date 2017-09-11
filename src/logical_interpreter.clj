@@ -12,11 +12,32 @@
 
 (defn fact-exists?
   [database fact]
+  ; TODO usar forma clujure, esto es java
   (.contains database fact)
 )
 
 (defn rule-exists?
   [database rule]
+)
+
+(defn get-rules
+  [database]
+  (filter valid-rule? database)
+)
+
+
+; podria crear un mapa con X: param1 Y: param2 puedo usar contains? seguramente
+(defn solve-query
+  [database query]
+  (def query-rule (get (re-matches #"([a-z]+)\(.+" query) 1))
+  (def rules (get-rules database))
+  (def rule-definition (filter (fn [x] (re-matches (re-pattern (str query-rule "\\(.+")) x)) rules))
+  (if (empty? rule-definition)
+    false
+    ; en vez de true deberia hacer el calculo aca
+    true
+
+  )
 )
 
 
@@ -26,6 +47,6 @@
   [text-database query]
   (def database (get-database text-database))
   (if (and (valid-database? database) (valid-fact? query))
-    (or (fact-exists? database query) (solve-rule ))
+    (or (fact-exists? database query) (solve-query database query))
     nil)
 )

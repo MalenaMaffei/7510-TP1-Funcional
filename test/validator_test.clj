@@ -3,26 +3,11 @@
             [validator :refer :all]))
 
 
-(def complete-invalid-database "
-	varon(juan).
-    varon.
-    padre(juan,pepe).
-    hola(que, tal).
-    saludar :- hola(X), hola(Y).
-")
+(def complete-invalid-database (list "varon(juan)" "padre(juan,pepe)" "hola(que, tal)" "saludar :- hola(X), hola(Y)"))
 
-(def incomplete-database "
-	varon(juan).
-    varon.
-")
+(def incomplete-database (list "varon(juan)" "varon"))
 
-(def complete-valid-database "
-	varon(juan).
-    varon(pepe).
-    padre(juan, pepe).
-    hola(que, tal).
-    saludar(X, Y) :- hola(X), hola(Y).
-")
+(def complete-valid-database (list "varon(juan)" "padre(juan, pepe)" "hola(que, tal)" "saludar(X, Y) :- hola(X), hola(Y)"))
 
 
 
