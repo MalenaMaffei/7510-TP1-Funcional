@@ -6,10 +6,10 @@
 
 (def rule-syntax (str "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" " :\\- " "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" "(, " "[a-z\\-]+\\([A-Z](, [A-Z]+){0,}\\)" "){0,}"))
 
-(defn delimit-pattern
-    "delimits a regex pattern"
+(defn gen-pattern
+    "generates regex pattern"
     [pattern]
-    (str "^" pattern "$")
+    (re-pattern (str "^" pattern "$"))
 )
 
 ;"TODO: rules tienen que ser validadas un poco mas, que las variables coincidan por lo menos
@@ -17,7 +17,7 @@
 (defn valid-fact?
     "checks if input has valid fact format"
     [fact]
-    (if (re-find (re-pattern (delimit-pattern fact-syntax)) fact)
+    (if (re-find (gen-pattern fact-syntax) fact)
         true
         false
     )
@@ -26,7 +26,7 @@
 (defn valid-rule?
     "checks if input has valid rule format"
     [rule]
-    (if (re-find (re-pattern (delimit-pattern rule-syntax)) rule)
+    (if (re-find (gen-pattern rule-syntax) rule)
         true
         false
     )
