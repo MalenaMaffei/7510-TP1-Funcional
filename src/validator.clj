@@ -11,7 +11,9 @@
     [pattern]
     (str "^" pattern "$")
 )
-"TODO: LAS RULES TIENEN COMO ARGUMENTOS VARIABLES EN MAYUS SOLAMENTE..."
+
+;"TODO: rules tienen que ser validadas un poco mas, que las variables coincidan por lo menos
+
 (defn valid-fact?
     "checks if input has valid fact format"
     [fact]
