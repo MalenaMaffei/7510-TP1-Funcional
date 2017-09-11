@@ -1,26 +1,13 @@
-# funcional-template
+# 7510-TP1-Funcional
+### Intérprete Lógico
 
-A Clojure library designed to be used as a template for each exercise/tp used in Tecnicas de Diseño.
+## Uso
 
-## Usage
+```
+evaluate-query <database> <query>
+```
 
-<Complete this section>
+donde <database> es una cadena de hechos y reglas separados por "." y <query> la consulta que se le quiera hacer a dicha <database>
 
-## License
-
-Copyright © 2017
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
-
-## Tutorial
-https://8thlight.com/blog/colin-jones/2010/11/26/a-leiningen-tutorial.html
-
-## Install leiningen
-https://github.com/technomancy/leiningen
-
-## Run Tests
+## Correr Tests
 lein test
-
-## Run Repl
-lein repl
